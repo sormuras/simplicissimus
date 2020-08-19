@@ -16,7 +16,7 @@ jobs:
 
       - name: 'Build with Bach.java'
         run: |
-          jshell -R-Dbach.generate.maven.pom.files=true https://sormuras.de/bach/build
+          jshell -R-Debug -R-Dbach.generate-maven-pom-files=true https://sormuras.de/bach/build
           for files in .bach/workspace/deploy/maven/*.files ; do cat ${files} ; done
           for files in .bach/workspace/deploy/maven/*.pom.xml ; do cat ${files} ; done
 
