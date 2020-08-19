@@ -15,7 +15,10 @@ jobs:
           java-version: 15-ea
 
       - name: 'Build with Bach.java'
-        run: jshell https://sormuras.de/bach/build
+        run: |
+          jshell -R-Dbach.generate.maven.pom.files https://sormuras.de/bach/build
+          for files in .bach/workspace/deploy/maven/*.files ; do cat ${files} ; done
+          for files in .bach/workspace/deploy/maven/*.pom.xml ; do cat ${files} ; done
 
       - name: 'Store logbook in build artifact'
         uses: actions/upload-artifact@v2
