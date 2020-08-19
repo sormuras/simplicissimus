@@ -5,5 +5,5 @@
 
 ## build
 
-- Install JDK 12 or newer
+- Install JDK 14 (at least 12)
 - Invoke `jshell https://sormuras.de/bach/build`
