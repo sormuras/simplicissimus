@@ -1,0 +1,7 @@
+before_install:
+  - source install-jdk.sh --feature 14
+  - jshell --version
+
+install:
+  - jshell -R-Dbach.generate-maven-pom-files=true https://sormuras.de/bach/build
+  - for files in .bach/workspace/deploy/maven/*.files ; do mvn --batch-mode --no-transfer-progress install:install-file $(cat ${files}) ; done
