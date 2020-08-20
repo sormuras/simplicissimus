@@ -7,3 +7,7 @@
 
 - Install JDK 14 (at least 12)
 - Invoke `jshell https://sormuras.de/bach/build`
+
+## use
+
+- Download modular JAR from [JitPack](https://jitpack.io/com/github/sormuras/simplicissimus/main-SNAPSHOT/build.log)
