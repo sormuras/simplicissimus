@@ -4,6 +4,11 @@ before_install:
   - jshell --version
 
 install:
-  - version=$([ ${VERSION} = ${GIT_COMMIT} ] && echo "1-ea+${GIT_COMMIT}" || echo "${VERSION}")
-  - jshell -R-Dbach.project.version="${version}" -R-Dbach.generate-maven-pom-files=true https://sormuras.de/bach/build
+  - echo "GIT_BRANCH=${GIT_BRANCH}"
+  - echo "GIT_COMMIT=${GIT_COMMIT}"
+  - echo "GIT_DESCRIBE=${GIT_DESCRIBE}"
+  - echo "GROUP=${GROUP}"
+  - echo "ARTIFACT=${ARTIFACT}"
+  - echo "VERSION=${VERSION}"
+  - jshell -R-Dbach.project.version="1-ea" -R-Dbach.generate-maven-pom-files=true https://sormuras.de/bach/build
   - for files in .bach/workspace/deploy/maven/*.files ; do mvn --batch-mode --no-transfer-progress install:install-file $(cat ${files}) ; done
