@@ -3,4 +3,4 @@
  *
  * @see <a href="https://github.com/sormuras/bach">Bach.java</a>
  */
-module de.sormuras.simplicissimus {}
+module com.github.sormuras.simplicissimus {}
