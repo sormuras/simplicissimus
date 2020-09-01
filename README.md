@@ -10,4 +10,9 @@
 
 ## use
 
+- Add `requires com.github.sormuras.simplicissimus` to your `module-info.java` file.
 - Download modular JAR from [JitPack](https://jitpack.io/com/github/sormuras/simplicissimus/main-SNAPSHOT/build.log)
+
+## api
+
+- Browse [API documentation](https://javadoc.jitpack.io/com/github/sormuras/simplicissimus/main-SNAPSHOT/javadoc/com.github.sormuras.simplicissimus/module-summary.html)
