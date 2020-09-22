@@ -1,6 +1,7 @@
 before_install:
+  - java -version
   - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
-  - source install-jdk.sh --feature 14
+  - source install-jdk.sh --feature 15
   - jshell --version
   - echo "GIT_BRANCH=${GIT_BRANCH}"
   - echo "GIT_COMMIT=${GIT_COMMIT}"
