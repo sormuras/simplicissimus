@@ -2,14 +2,18 @@ before_install:
   - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
   - source install-jdk.sh --feature 14
   - jshell --version
-
-install:
   - echo "GIT_BRANCH=${GIT_BRANCH}"
   - echo "GIT_COMMIT=${GIT_COMMIT}"
   - echo "GIT_DESCRIBE=${GIT_DESCRIBE}"
   - echo "GROUP=${GROUP}"
   - echo "ARTIFACT=${ARTIFACT}"
   - echo "VERSION=${VERSION}"
-  - version=$([ ${GIT_BRANCH} = ${GIT_COMMIT} ] && echo "${VERSION}" || echo "2-ea+${GIT_DESCRIBE}")
+  - echo "var code = 0" >> check.jsh
+  - echo "try { java.lang.module.ModuleDescriptor.Version.parse(\"${VERSION}\"); }" >> check.jsh
+  - echo "catch (Exception e) { code = 1; }" >> check.jsh
+  - echo "/exit code" >> check.jsh
+
+install:
+  - version=$($(jshell check-version.jsh) && echo "${VERSION}" || echo "2-ea+${GIT_DESCRIBE}")
   - jshell -R-Dbach.project.name="simplicissimus" -R-Dbach.project.version="${version}" -R-Dbach.generate-maven-pom-files=true https://sormuras.de/bach/build
   - for files in .bach/workspace/deploy/maven/*.files ; do mvn --batch-mode --no-transfer-progress install:install-file $(cat ${files}) ; done
