@@ -8,10 +8,11 @@ before_install:
   - echo "GROUP=${GROUP}"
   - echo "ARTIFACT=${ARTIFACT}"
   - echo "VERSION=${VERSION}"
-  - echo "var code = 0" >> check.jsh
-  - echo "try { java.lang.module.ModuleDescriptor.Version.parse(\"${VERSION}\"); }" >> check.jsh
-  - echo "catch (Exception e) { code = 1; }" >> check.jsh
-  - echo "/exit code" >> check.jsh
+  - echo "var code = 0" >> check-version.jsh
+  - echo "try { java.lang.module.ModuleDescriptor.Version.parse(\"${VERSION}\"); }" >> check-version.jsh
+  - echo "catch (Exception e) { code = 1; }" >> check-version.jsh
+  - echo "/exit code" >> check-version.jsh
+  - cat check-version.jsh
 
 install:
   - version=$($(jshell check-version.jsh) && echo "${VERSION}" || echo "2-ea+${GIT_DESCRIBE}")
