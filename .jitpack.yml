@@ -9,13 +9,10 @@ before_install:
   - echo "GROUP=${GROUP}"
   - echo "ARTIFACT=${ARTIFACT}"
   - echo "VERSION=${VERSION}"
-  - echo "var code = 0" >> check-version.jsh
-  - echo "try { java.lang.module.ModuleDescriptor.Version.parse(\"${VERSION}\"); }" >> check-version.jsh
-  - echo "catch (Exception e) { code = 1; }" >> check-version.jsh
-  - echo "/exit code" >> check-version.jsh
-  - cat check-version.jsh
+  - echo "git describe --tags --exact-match=$(git describe --tags --exact-match)"
+  - echo "git rev-parse --short HEAD=$(git rev-parse --short HEAD)"
 
 install:
-  - version=$($(jshell check-version.jsh) && echo "${VERSION}" || echo "2-ea+${GIT_DESCRIBE}")
+  - version=$([ $(git describe --tags --exact-match) = ${VERSION} ] && echo "${VERSION}" || echo "2-ea+$(git rev-parse --short HEAD)")
   - jshell -R-Dbach.project.name="simplicissimus" -R-Dbach.project.version="${version}" -R-Dbach.generate-maven-pom-files=true https://sormuras.de/bach/build
   - for files in .bach/workspace/deploy/maven/*.files ; do mvn --batch-mode --no-transfer-progress install:install-file $(cat ${files}) ; done
