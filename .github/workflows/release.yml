@@ -25,12 +25,12 @@ jobs:
           java-version: 15
 
       - name: 'Build with Bach'
-        run: jshell -R-Dbach.project.name='simplicissimus' -R-Dbach.project.version="${{ github.ref }}" -R-Dbach.javac.release='9' https://sormuras.de/bach/build
+        run: jshell -R-Dbach.project.name='simplicissimus' -R-Dbach.project.version="${{ steps.get_release.outputs.tag_name }}" -R-Dbach.javac.release='9' https://sormuras.de/bach/build
 
       - name: 'Upload module org.github.sormurassimplicissimus'
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.get_release.outputs.upload_url }}
-          asset_path: .bach/workspace/modules/org.github.sormurassimplicissimus@${{ github.ref }}.jar
-          asset_name: org.github.sormurassimplicissimus@${{ github.ref }}.jar
+          asset_path: .bach/workspace/modules/org.github.sormurassimplicissimus@${{ steps.get_release.outputs.tag_name }}.jar
+          asset_name: org.github.sormurassimplicissimus@${{ steps.get_release.outputs.tag_name }}.jar
           asset_content_type: application/java-archive
