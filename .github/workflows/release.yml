@@ -15,7 +15,7 @@ jobs:
       - name: 'Check out sources'
         uses: actions/checkout@v2
 
-      - name: 'Get release properties'
+      - name: 'Get release information'
         id: get_release
         uses: bruceadams/get-release@v1.2.1
 
@@ -27,10 +27,10 @@ jobs:
       - name: 'Build with Bach'
         run: jshell -R-Dbach.project.name='simplicissimus' -R-Dbach.project.version="${{ steps.get_release.outputs.tag_name }}" -R-Dbach.javac.release='9' https://sormuras.de/bach/build
 
-      - name: 'Upload module org.github.sormurassimplicissimus'
+      - name: 'Upload module com.github.sormuras.simplicissimus'
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.get_release.outputs.upload_url }}
-          asset_path: .bach/workspace/modules/org.github.sormurassimplicissimus@${{ steps.get_release.outputs.tag_name }}.jar
-          asset_name: org.github.sormurassimplicissimus@${{ steps.get_release.outputs.tag_name }}.jar
+          asset_path: .bach/workspace/modules/com.github.sormuras.simplicissimus@${{ steps.get_release.outputs.tag_name }}.jar
+          asset_name: com.github.sormuras.simplicissimus@${{ steps.get_release.outputs.tag_name }}.jar
           asset_content_type: application/java-archive
