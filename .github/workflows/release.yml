@@ -1,0 +1,36 @@
+name: Release
+
+on:
+  release:
+    types: [created]
+
+env:
+  GITHUB_TOKEN: ${{ github.token }}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Check out sources'
+        uses: actions/checkout@v2
+
+      - name: 'Get release properties'
+        id: get_release
+        uses: bruceadams/get-release@v1.2.1
+
+      - name: 'Set up JDK 15'
+        uses: actions/setup-java@v1
+        with:
+          java-version: 15
+
+      - name: 'Build with Bach'
+        run: jshell -R-Dbach.project.name='simplicissimus' -R-Dbach.project.version="${{ github.ref }}" -R-Dbach.javac.release='9' https://sormuras.de/bach/build
+
+      - name: 'Upload module org.github.sormurassimplicissimus'
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
+          asset_path: .bach/workspace/modules/org.github.sormurassimplicissimus@${{ github.ref }}.jar
+          asset_name: org.github.sormurassimplicissimus@${{ github.ref }}.jar
+          asset_content_type: application/java-archive
