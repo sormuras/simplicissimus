@@ -15,14 +15,14 @@ jobs:
       - name: 'Check out sources'
         uses: actions/checkout@v2
 
-      - name: 'Get release information'
-        id: get_release
-        uses: bruceadams/get-release@v1.2.1
-
       - name: 'Set up JDK 15'
         uses: actions/setup-java@v1
         with:
           java-version: 15
+
+      - name: 'Get release information'
+        id: get_release
+        uses: bruceadams/get-release@v1.2.1
 
       - name: 'Build with Bach'
         run: jshell -R-Dbach.project.name='simplicissimus' -R-Dbach.project.version="${{ steps.get_release.outputs.tag_name }}" -R-Dbach.javac.release='9' https://sormuras.de/bach/build

@@ -1,6 +1,10 @@
 name: CI
 
-on: push
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
   build:
@@ -16,12 +20,12 @@ jobs:
 
       - name: 'Build with Bach.java'
         run: |
-          jshell -R-Debug -R-Dbach.generate-maven-pom-files=true https://sormuras.de/bach/build
-          for files in .bach/workspace/deploy/maven/*.files ; do cat ${files} ; done
-          for files in .bach/workspace/deploy/maven/*.pom.xml ; do cat ${files} ; done
+          jshell -R-Debug https://sormuras.de/bach/build
 
-      - name: 'Store logbook in build artifact'
+      - name: 'Upload build artifacts'
         uses: actions/upload-artifact@v2
         with:
           name: build
-          path: .bach/workspace/logbook.md
+          path: |
+            .bach/workspace/logbook.md
+            .bach/workspace/modules
