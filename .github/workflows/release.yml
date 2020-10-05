@@ -2,7 +2,7 @@ name: Release
 
 on:
   release:
-    types: [published]
+    types: released
 
 env:
   GITHUB_TOKEN: ${{ github.token }}
@@ -19,6 +19,14 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 15
+
+      - name: 'Print release event information'
+        run: |
+          echo "github.actor=${{ github.actor }}"
+          echo "github.sha=${{ github.sha }}"
+          echo "github.event.release.tag_name=${{ github.event.release.tag_name }}"
+          echo "github.event.release.upload_url=${{ github.event.release.upload_url }}"
+          echo ::set-env name=VERSION::${{ github.event.release.release.tag_name }}
 
       - name: 'Get release information'
         id: get_release
