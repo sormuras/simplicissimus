@@ -26,15 +26,14 @@ jobs:
           echo "github.sha=${{ github.sha }}"
           echo "github.event.release.tag_name=${{ github.event.release.tag_name }}"
           echo "github.event.release.upload_url=${{ github.event.release.upload_url }}"
-          echo ::set-env name=VERSION::${{ github.event.release.tag_name }}
 
       - name: 'Build with Bach'
-        run: jshell -R-Dbach.project.name=${{ github.event.repository.name }} -R-Dbach.project.version="${VERSION}" -R-Dbach.javac.release='9' https://sormuras.de/bach/build
+        run: jshell -R-Dbach.project.name=${{ github.event.repository.name }} -R-Dbach.project.version="${{ github.event.release.tag_name }}" -R-Dbach.javac.release='9' https://sormuras.de/bach/build
 
       - name: 'Upload module com.github.sormuras.simplicissimus'
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: .bach/workspace/modules/com.github.sormuras.simplicissimus@${VERSION}.jar
-          asset_name: com.github.sormuras.simplicissimus@${VERSION}.jar
+          asset_path: .bach/workspace/modules/com.github.sormuras.simplicissimus@${{ github.event.release.tag_name }}.jar
+          asset_name: com.github.sormuras.simplicissimus@${{ github.event.release.tag_name }}.jar
           asset_content_type: application/java-archive
