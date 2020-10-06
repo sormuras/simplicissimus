@@ -14,7 +14,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: 'Build with Bach'
-        uses: sormuras/bach/.github/action@master
+        uses: sormuras/bach-build@master
+        with:
+          project-version: 0-ea+${{ github.sha }}
 
       - name: 'Upload build artifacts'
         uses: actions/upload-artifact@v2
