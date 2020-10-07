@@ -2,26 +2,31 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   pull_request:
-    branches: [main]
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: 'Check out sources'
+      - name: 'Check out repository'
         uses: actions/checkout@v2
+
+      - name: 'Set up Java'
+        uses: actions/setup-java@v1
+        with:
+          java-version: 15
 
       - name: 'Build with Bach'
         uses: sormuras/bach-build@v1
         with:
-          project-version: 0-ea+${{ github.sha }}
+          project-version: 1-ea+${{ github.sha }}
 
       - name: 'Upload build artifacts'
         uses: actions/upload-artifact@v2
         with:
-          name: simplicissimus-build-0-ea+${{ github.sha }}
+          name: ${{ github.event.repository.name }}-build-1-ea+${{ github.sha }}
           path: |
             .bach/workspace/logbook.md
             .bach/workspace/modules

@@ -2,7 +2,7 @@ name: Release
 
 on:
   release:
-    types: [released]
+    types: [ released ]
 
 env:
   GITHUB_TOKEN: ${{ github.token }}
@@ -10,22 +10,14 @@ env:
 jobs:
   release:
     runs-on: ubuntu-latest
-
     steps:
-      - name: 'Check out sources'
+      - name: 'Check out repository'
         uses: actions/checkout@v2
 
       - name: 'Set up Java'
         uses: actions/setup-java@v1
         with:
           java-version: 15
-
-      - name: 'Print release event information'
-        run: |
-          echo "github.actor=${{ github.actor }}"
-          echo "github.sha=${{ github.sha }}"
-          echo "github.event.release.tag_name=${{ github.event.release.tag_name }}"
-          echo "github.event.release.upload_url=${{ github.event.release.upload_url }}"
 
       - name: 'Build with Bach'
         uses: sormuras/bach-build@v1
