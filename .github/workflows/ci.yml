@@ -14,14 +14,14 @@ jobs:
         uses: actions/checkout@v2
 
       - name: 'Build with Bach'
-        uses: sormuras/bach-build@main
+        uses: sormuras/bach-build@v1
         with:
           project-version: 0-ea+${{ github.sha }}
 
       - name: 'Upload build artifacts'
         uses: actions/upload-artifact@v2
         with:
-          name: build
+          name: simplicissimus-build-0-ea+${{ github.sha }}
           path: |
             .bach/workspace/logbook.md
             .bach/workspace/modules
