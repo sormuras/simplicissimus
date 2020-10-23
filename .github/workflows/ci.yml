@@ -46,6 +46,6 @@ jobs:
           automatic_release_tag: 'early-access'
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           prerelease: true
-          title: ${{ github.event.repository.name }}-${{ env.VERSION }}
+          title: "Simplicissimus ${{ env.VERSION }}"
           files: |
             .bach/workspace/modules/*.jar
