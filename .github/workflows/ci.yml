@@ -18,15 +18,33 @@ jobs:
         with:
           java-version: 15
 
+      - name: 'Set up version string'
+        run: |
+          SHA7=$(echo "${{ github.sha }}" | cut -c1-7)
+          VERSION="1-ea+${SHA7}"
+          echo "VERSION=${VERSION}"
+          echo "VERSION=${VERSION}" >> ${GITHUB_ENV}
+
       - name: 'Build with Bach'
         uses: sormuras/bach-build@v1
         with:
-          project-version: 1-ea+${{ github.sha }}
+          project-version: ${{ env.VERSION }}
 
       - name: 'Upload build artifacts'
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ github.event.repository.name }}-build-1-ea+${{ github.sha }}
+          name: ${{ github.event.repository.name }}-build-${{ env.VERSION }}
           path: |
             .bach/workspace/logbook.md
             .bach/workspace/modules
+
+      - name: 'Release early-access build'
+        if: github.ref == 'refs/heads/main'
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          automatic_release_tag: 'early-access'
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          prerelease: true
+          title: ${{ github.event.repository.name }}-${{ env.VERSION }}
+          files: |
+            .bach/workspace/modules/*.jar
