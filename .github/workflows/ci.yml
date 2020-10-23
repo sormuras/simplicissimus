@@ -39,6 +39,12 @@ jobs:
             .bach/workspace/logbook.md
             .bach/workspace/modules
 
+      - name: 'Rename modular JAR files to match early-access tag'
+        run: |
+          ls .bach/workspace/modules
+          for i in .bach/workspace/modules/*.jar; do mv "$i" "${i/${{ env.VERSION }}/early-access}"; done
+          ls .bach/workspace/modules
+
       - name: 'Release early-access build'
         if: github.ref == 'refs/heads/main'
         uses: marvinpinto/action-automatic-releases@latest
