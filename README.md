@@ -6,7 +6,9 @@
 ## build
 
 - Install [JDK](https://jdk.java.net)
-- Invoke `jshell https://sormuras.de/bach/build`
+- Invoke `jshell https://bit.ly/bach-ea-boot`
+- Call `build()`
+- Finally `/exit`
 
 ## use
 
