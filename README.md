@@ -6,11 +6,9 @@
 ## build
 
 - Install [JDK](https://jdk.java.net)
-- Invoke `jshell https://bit.ly/bach-ea-boot`
-- Call `build()`
-- Finally `/exit`
+- Invoke `jshell https://bit.ly/bach-main-build`
 
 ## use
 
-- Add `requires com.github.sormuras.simplicissimus` to your `module-info.java` file.
-- Download modular JAR from [latest release](https://github.com/sormuras/simplicissimus/releases/latest) page.
+- Add `requires com.github.sormuras.simplicissimus` to your `module-info.java` file
+- Download modular JAR from [latest release](https://github.com/sormuras/simplicissimus/releases/latest) page
