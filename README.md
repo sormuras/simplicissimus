@@ -5,8 +5,8 @@
 
 ## build
 
-- Install [JDK](https://jdk.java.net)
-- Invoke `jshell https://bit.ly/bach-main-build`
+- Install [JDK](https://jdk.java.net) 16 or later
+- Invoke `jshell https://github.com/sormuras/bach/releases/download/16.0.2/build.jsh`
 
 ## use
 
