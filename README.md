@@ -1,14 +1,15 @@
 # simplicissimus - simple and empty
 
-> "The tools we use have a profound (and devious!) influence on our thinking habits, and, therefore, on our thinking abilities."
-[Edsger W. Dijkstra, 18 June 1975](https://www.cs.virginia.edu/~evans/cs655/readings/ewd498.html)
+One Java module. Nothing more, nothing less.
 
 ## build
 
 - Install [JDK](https://jdk.java.net) 16 or later
-- Invoke `jshell https://github.com/sormuras/bach/releases/download/16.0.2/build.jsh`
+- Clone this repository
+- Invoke `jshell https://bit.ly/bach-init`
+- On Windows call `.bach\bin\bach build`, on Linux `.bach/bin/bach build`
 
 ## use
 
-- Add `requires com.github.sormuras.simplicissimus` to your `module-info.java` file
+- Add `requires com.github.sormuras.simplicissimus;` to your `module-info.java` file
 - Download modular JAR from [latest release](https://github.com/sormuras/simplicissimus/releases/latest) page
