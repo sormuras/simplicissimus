@@ -22,7 +22,7 @@ jobs:
         with:
           java-version: 16-ea
 
-      - name: 'Set up version and build variable'
+      - name: 'Shorten version and build variable'
         run: |
           SHA7=$(echo "${{ github.sha }}" | cut -c1-7)
           VERSION_AND_BUILD=$VERSION+$SHA7
@@ -39,7 +39,7 @@ jobs:
       - name: 'Upload build artifacts'
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ github.event.repository.name }}-build-${{ env.VERSION }}
+          name: ${{ github.event.repository.name }}-build-${{ env.VERSION_AND_BUILD }}
           path: |
             .bach/workspace/logbook.md
             .bach/workspace/modules
