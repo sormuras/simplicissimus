@@ -1,0 +1,10 @@
+name: Released
+
+on: [ release ]
+
+jobs:
+  released:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Release event information'
+        uses: hmarr/debug-action@v2
